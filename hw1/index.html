@@ -32,7 +32,7 @@
 
 		<br>
 
-		Link to webpage: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
+		Link to webpage: <a href="https://cal-cs184-student.github.io/hw-webpages-kj_jl/hw1/index.html">cal-cs184-student.github.io/hw-webpages-kj_jl/hw1/index.html</a>
 		
 		<br>
 
@@ -169,6 +169,8 @@
 				  </tr>
 				</table>
 			</div>
+			<br>
+			<span style="color: black;"> From those images we can clearly see that nearest sampling at 1 sample per pixel is the jaggiest. Bilinear sampling with sample rate 1 also has jaggies but is relatively better than nearest sampling. When we increase sample rate to 16, the images look almost identical where the edges are smoothed out and well-blended.</span>
 			<br><br>
 			<span style="color: blue;"> 3) Comment on the relative differences. Discuss when there will be a large difference between the two methods and why.</span><br>
 			<span style="color: black;"> Nearest sampling at 1 sample per pixel has the most obvious jaggies as we can see when we zoom into the bell section of the tower in the image. We can clearly see the jaggies in the shade areas and column areas. On the other hand, bilinear sampling at 1 sample per pixel clearly looks better than the nearest sampling since it has more gradients and thus looks smoother than the nearest sampling one. However, when we increase the sampling rate to 16, there is no longer a big difference between the two methods since both have enough gradients and averaging. The two screenshots are nearly identical to each other. 
