@@ -28,18 +28,19 @@
 	<body>
 		<div class="container">
 		<h1>CS184/284A Spring 2025 Homework 2 Write-Up</h1>
-		<div style="text-align: center;">Names: </div>
+		<div style="text-align: center;">Names: Karina Jin & Jackie Lian </div>
 
 		<br>
 
-		Link to webpage: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
+		Link to webpage: <a href="https://cal-cs184-student.github.io/hw-webpages-kj_jl/hw2/index.html">cal-cs184-student.github.io/hw-webpages-kj_jl/hw2/index.html</a>
 
 		<br>
 		
-		Link to GitHub repository: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
+		Link to GitHub repository: <a href="https://github.com/cal-cs184-student/sp25-hw2-kj_jl_hw2.git">cal-cs184-student/sp25-hw2-kj_jl_hw2</a>
+
 
 		<figure>
-			<img src="teapot.png" alt="Teapot" style="width:50%"/>
+			<img src="images/teapot.png" alt="Teapot" style="width:50%"/>
 			<figcaption>You can add images with captions!</figcaption>
 		</figure>
 
@@ -53,45 +54,120 @@
 		<h2>Section I: Bezier Curves and Surfaces</h2>
 
 		<h3>Part 1: Bezier curves with 1D de Casteljau subdivision</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-		<p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>
-		<div style="display: flex; flex-direction: column; align-items: center;">
-			<table style="width: 100%; text-align: center; border-collapse: collapse;">
-			  <tr>
-				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-			  </tr>
-			  <tr>
-				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-			  </tr>
-			</table>
-		</div>
+		<p>
+			<span style="color: blue;"> 1) Briefly explain de Casteljau's algorithm and how you implemented it in order to evaluate Bezier curves.</span><br>
+  			<span style="color: black;"> De Casteljau's algorithm is a recursive method used to evaluate Bezier curves. It works by linearly interpolating between control points at a given parameter t. The process continues recursively until only a single point remains, which is the point on the Bezier curve corresponding to parameter t. At each recursive step, we will compute n-1 intermediate points if given n points for input. In our implementation, we perform one step of the de Casteljau's algorithm by iterating through the input points, and computing the "weighted" average of two consecutive points repeatedly according to the lerp function: lerp(p<sub>i</sub>+p<sub>i+1</sub>, t) = (1-t)p<sub>i</sub>+tp<sub>i+1</sub> and then storing those final results into an array of Vector2D and then returning it.</span>
+			<br><br>
+			<span style="color: blue;"> 2) Take a look at the provided .bzc files and create your own Bezier curve with 6 control points of your choosing. Use this Bezier curve for your screenshots below. </span><br>
+			<span style="color: blue;"> Show screenshots of each step / level of the evaluation from the original control points down to the final evaluated point. Press E to step through. Toggle C to show the completed Bezier curve as well. </span><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part1_step_1.png" width="400px"/>
+					  <figcaption>The curve at step 1.</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part1_step_2.png" width="400px"/>
+					  <figcaption>The curve at step 2.</figcaption>
+					</td>
+				  </tr>
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part1_step_3.png" width="400px"/>
+					  <figcaption>The curve at step 3.</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part1_step_4.png" width="400px"/>
+					  <figcaption>The curve at step 5.</figcaption>
+					</td>
+				  </tr>
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part1_step_5.png" width="400px"/>
+					  <figcaption>The curve at step 5.</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part1_step_6.png" width="400px"/>
+					  <figcaption>The curve at step 6.</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<br><br>
+			<span style="color: blue;"> 3) Show a screenshot of a slightly different Bezier curve by moving the original control points around and modifying the parameter t via mouse scrolling. </span><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<figure style="text-align: center;">
+					<img src="images/part1_different_curve.png" width="500px"/>
+					<figcaption>Different Bezier curve by moving t </figcaption>
+				</figure>
+			</div>
+		</p>
+		
 
 		<h3>Part 2: Bezier surfaces with separable 1D de Casteljau</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>
+			<span style="color: blue;"> 1) Briefly explain how de Casteljau algorithm extends to Bezier surfaces and how you implemented it in order to evaluate Bezier surfaces.</span><br>
+  			<span style="color: black;"> A Bezier surface is an extension of a Bezier curve into two dimensions where instead of a 1D parameter t, we now have two parameters u and v. We can also think of the Bezier surface as being formed by a collection of Bezier curves. For each Bezier curve we are given in the 3D space, we first use parameter u to find the final points of all of those curves using an algorithm that's similar to what we did in part 1 (the only difference is going from 2D points to 3D points). Then we connect those final points to form a new curve, which we then apply de Casteljau again to find the final point that lies on the Bezier surface. In general, for an nxm Bezier surface, the control points are arranged in a grid, and the evaluation consists of two steps: 1) Apply De Casteljau's algorithm along one parameter u to get a set of intermediate points. 2) Apply De Casteljau's algorithm again along the other parameters v to get the final surface point.
+				<br><br>
+				In our implementation, we first call BezierPatch::evaluate where we break up the control points into rows, then pass them into evaluate1D (evaluate1D internally calls evaluateStep to perform one step of de Casteljau) to compute the control points for the final curve. Then those control points are collected back in evaluate to compute the final point on the surface using evaluate1D applied on v again.
+				</span>
+			<br><br>
+			<span style="color: blue;"> 2) Show a screenshot of bez/teapot.bez (not .dae) evaluated by your implementation. </span><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<figure style="text-align: center;">
+					<img src="images/part2_teapot.png" width="500px"/>
+					<figcaption>bez/teapot.bez</figcaption>
+				</figure>
+			</div>
+		</p>
 
 		<h2>Section II: Triangle Meshes and Half-Edge Data Structure</h2>
 
 		<h3>Part 3: Area-weighted vertex normals</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>
+			<span style="color: blue;"> 1) Briefly explain how you implemented the area-weighted vertex normals.</span><br>
+  			<span style="color: black;"> In our implementation, to compute the area-weighted vertex normal we use the halfedge data structure to iterate through all faces that are incident to the current vertex. We also initialized two variables to keep track of total normal and total area (for normalizing in the last step). In order to compute the face normals, we need to first grab the positions of the two other vertices forming the triangle with our current vertex. Then we do vector subtraction to get two vectors that lie on that face. We then use cross product to compute the vector that is perpendicular to both vectors (i.e. the normal). In the meantime, we use 1/2 * normal to compute the area of that face as well and add it into the total area. We also store area * normal into our total normal (multiplied by area to account for the weighted average later on). Then we begin to iterate to the next face. Finally, after all faces are traversed through, we divide our total normal by total area (for weighted average since area/total_area gives us the weight). And lastly, we normalize the final normal and return it.</span>
+			<br><br>
+			<span style="color: blue;"> 2) Show screenshots of dae/teapot.dae (not .bez) comparing teapot shading with and without vertex normals. Use Q to toggle default flat shading and Phong shading. </span><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part3_flat.png" width="400px"/>
+					  <figcaption>Flat shading of teapot.dae.</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part3_phong.png" width="400px"/>
+					  <figcaption>Phong shading of teapot.dae.</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+		</p>
 
 		<h3>Part 4: Edge flip</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+		<p>
+			<span style="color: blue;"> 1) Briefly explain how you implemented the edge flip operation and describe any interesting implementation / debugging tricks you have used.</span><br>
+  			<span style="color: black;"> To implement the edge flip, we first drew out a detailed diagram for both before and after flip involving all vertices, edges, faces and halfedges. In code, we first retrieve all of the necessary information. Then we begin to reassign the pointers for all of the existing vertices, edges, faces and halfedges according to the after flip diagram. This includes updating the halfedges for vertices, edges and faces while setting neighbors for halfedges both internal and external. Luckily we are able to achieve the correct result after some very careful follow through with the diagram so we didn't have to do any extensive debugging.</span>
+			<br><br>
+			<span style="color: blue;"> 2) Show screenshots of the teapot before and after some edge flips. </span><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part4_before.png" width="400px"/>
+					  <figcaption>teapot before edge flip.</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part4_after.png" width="400px"/>
+					  <figcaption>teapot after edge flip.</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+		</p>
+		
 		<h3>Part 5: Edge split</h3>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
