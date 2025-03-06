@@ -49,8 +49,10 @@
 		-->
 
 		<h2>Overview</h2>
-		Give a high-level overview of what you implemented in this homework. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the homework.
-
+		In this assignment we will first explore and implement de Casteljau's algorithm for computing Bezier Curves and Surfaces where we coded out each evaluation step along the way. Then we move onto navigating through meshes via halfedge data structure and implementing the local mesh operations (flip and split) as well as global mesh operations such as upsampling via loop subdivision algorithm. Those algorithms and operations not only allowed us to define a smooth surface/shape, but also enabled us to smooth out corners and edges to make the 3D meshes super cool!
+		<br><br>
+		Before working on this project, we didn't know that during edge flips we need to somehow rotate the inner halfedges or change the orientation of the left-right triangles into top-down. We thought we only needed to change the orientation of the middle edge that we are flipping. So this is something interesting to learn. In addition to that, it's interesting and fascinating to see how just by computing the weighted average of normals at vertices we are able to go from flat shading with distinct edges to phong shading with a very smooth surface. It's so simple yet very powerful!
+		<br><br>
 		<h2>Section I: Bezier Curves and Surfaces</h2>
 
 		<h3>Part 1: Bezier curves with 1D de Casteljau subdivision</h3>
@@ -169,24 +171,149 @@
 		</p>
 		
 		<h3>Part 5: Edge split</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>
+			<span style="color: blue;"> 1) Briefly explain how you implemented the edge split operation and describe any interesting implementation / debugging tricks you have used.</span><br>
+  			<span style="color: black;"> To implement edge split, we basically went through a similar process to part 4 where we drew out the before and after diagrams for performing the split and labelled out all of the information we need to consider and add. For edge split, we again first retrieve all of the vertices, halfedges etc. Then we compute the midpoint between the two ends of the edge we are splitting on. After that, we need to create one new vertex (the midpoint), two new faces, three new edges and 6 new halfedges for finishing up the split. We assigned all of the new vertices and edges' isNew property to true. Then we begin to reassign all of the pointers for all vertices, edges, faces and halfedges, similar to what we did in part 4 (except this time there is more reassignments). After all reassignment is done, we simply return the new vertex (midpoint).</span>
+			<br><br>
+			<span style="color: blue;"> 2) Show screenshots of a mesh before and after some edge splits. </span><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part5_before_1.png" width="400px"/>
+					  <figcaption>teapot before edge split.</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part5_after_1.png" width="400px"/>
+					  <figcaption>teapot after edge split.</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<br><br>
+			<span style="color: blue;"> 3) Show screenshots of a mesh before and after a combination of both edge splits and edge flips.</span><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part5_before_2.png" width="400px"/>
+					  <figcaption>teapot before edge split and edge flip.</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part5_after_2.png" width="400px"/>
+					  <figcaption>teapot after edge split and edge flip.</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<br><br>
+			<span style="color: blue;"> 4) Write about your eventful debugging journey, if you have experienced one.</span><br>
+  			<span style="color: black;"> We at first forgot to set the newly created edges's isNew property to true. And at that time when we were eyeballing the splits and everything looked like it was working properly so we just moved on. It wasn't until we were having trouble with part 6 that we realized we probably missed some details in this part (created some really weird shape after loop division, and that's when we realized the splitting doesn't look quite right). Then we came back to part 5 to see what details we might be missing and realized that we forgot to set the isNew properties (which took a while to figure out).</span>
+			<br><br>
+		</p>
 
 		<h3>Part 6: Loop subdivision for mesh upsampling</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-		<h2>(Optional) Section III: Potential Extra Credit - Art Competition: Model something Creative</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-		<h2>Additional Notes (please remove)</h2>
-		<ul>
-			<li>You can also add code if you'd like as so: <code>code code code</code></li>
-			<li>If you'd like to add math equations, 
-				<ul>
-					<li>You can write inline equations like so: \( a^2 + b^2 = c^2 \)</li>
-					<li>You can write display equations like so: \[ a^2 + b^2 = c^2 \]</li>
-				</ul>
-			</li>
-		</ul>
-		</div>
+		<p>
+			<span style="color: blue;"> 1) Briefly explain how you implemented the loop subdivision and describe any interesting implementation / debugging tricks you have used.</span><br>
+  			<span style="color: black;"> We basically followed the recommended guidelines and the comments in starter code. In our implementation, we begin by pre-computing the positions for all vertices in the original mesh using the loop subdivision rule (here we traverse over all neighboring vertices of the current one and compute the weighted average) and storing their new positions inside their respective newPosition property (saved for later). Next, we compute the positions for all of the new vertices (which are essentially midpoints of all edges in the original mesh) and store those new positions into edge's newPosition property. In the meantime, we also set the isNew property of all of those edges to false since they come from the original mesh. Then we begin to do all of the actual splitting by iterating over all old edges and calling our part5's splitEdge on each of them which creates a new vertex who will take the edge's newPosition and the isNew property of the vertex will also be set to true. After that, we need to flip any new edge that connects an old and a new vertex by calling our part4's flipEdge on it. Finally, in our last step we reassign the positions for all of the old vertices (assign them to the newPosition) and set all new vertices' isNew property to false.</span>
+			<br><br>
+			<span style="color: blue;"> 2) Take some notes, as well as some screenshots, of your observations on how meshes behave after loop subdivision. What happens to sharp corners and edges? Can you reduce this effect by pre-splitting some edges?</span><br>
+  			<span style="color: black;"> As we do more iterations of loop subdivision, the sharp corners and edges begin to flatten out/smooth out more and more. And this is because loop subdivision updates the new positions of vertices in a way such that it maintains the original shape while ensuring continuity and fairness (weighted contributions from the neighbors, &frac38; - &frac18; rule preserves edge fairness) within the mesh. This ensures that the mesh can converge smoothly to a continuous limit surface. This rounding/smoothing effect is obvious from the screenshots below where we can see going from the 0 iteration of loop subdivision up to 4 iterations of subdivision, the cube begins to become more and more rounded and ball-like. The contrast is especially noticeable going from 0 iteration to 1 iteration of subdivision where we can see all of the eight sharp corners of the cube just "magically" disappear and become a lot more rounded than before (couldn't even tell which vertices used to be the corners).</span>
+			<br><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part6_smooth_0.png" width="400px"/>
+					  <figcaption>Cube at iteration 0.</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part6_smooth_1.png" width="400px"/>
+					  <figcaption>Cube at iteration 1.</figcaption>
+					</td>
+				  </tr>
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part6_smooth_2.png" width="400px"/>
+					  <figcaption>Cube at iteration 2.</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part6_smooth_3.png" width="400px"/>
+					  <figcaption>Cube at iteration 3.</figcaption>
+					</td>
+				  </tr>
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part6_smooth_4.png" width="400px"/>
+					  <figcaption>Cube at iteration 4.</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<br>
+			<span style="color: black;"> To reduce this smoothing effect, we can pre-process the cube by pre-splitting edges around the cube like in the following image. And we can see now when we do 1 iteration of subdivision, the corners are still pretty obvious from the image (it still retains the cube-like shape compared to the ball-like shape from above). Even after 3 rounds of subdivision, it still maintains the cube-shape (which looks like a dice at this point).</span>
+			<br><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/p6_presplit_0.png" width="400px"/>
+					  <figcaption>Cube face splitted 5 times [front view].</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/p6_presplit_1.png" width="400px"/>
+					  <figcaption>Pre-splitted cube at iter 1.</figcaption>
+					</td>
+				  </tr>
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/p6_presplit_2.png" width="400px"/>
+					  <figcaption>Pre-splitted cube at iter 2.</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/p6_presplit_3.png" width="400px"/>
+					  <figcaption>Pre-splitted cube at iter 3.</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<br><br>
+			<span style="color: blue;"> 3) Load dae/cube.dae. Perform several iterations of loop subdivision on the cube. Notice that the cube becomes slightly asymmetric after repeated subdivisions. Can you pre-process the cube with edge flips and splits so that the cube subdivides symmetrically? Document these effects and explain why they occur. Also explain how your pre-processing helps alleviate the effects.</span><br>
+  			<span style="color: black;"> We can pre-process the cube by splitting the diagonal on each face of the cube so that now we will have two symmetrical diagonals on each face. Then when we subdivide it, we can see that it now can be subdivided symmetrically as hoped.<br><br>
+				The original asymmetric subdivision occurs because the starting topology of the cube is itself asymmetrical along all 3 axes due to the single diagonal on each face (i.e. they are not left-right nor top-down symmetric). The initial triangulation is not consistent across all faces of the cube. Therefore when we perform subdivision, we will not get symmetrical results. <br><br>
+				By splitting the diagonal on each face, we now end up with a cross-like shape, which is symmetrical, on each face as seen in the image below. Since each face is now completely identical and symmetrical with even triangulation, when we do subdivisions it will also produce symmetrical results.
+				</span>
+			<br><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/p6_original_cube.png" width="400px"/>
+					  <figcaption>Original Cube.</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/p6_split_cube.png" width="400px"/>
+					  <figcaption>Cube having each diagonal split on each face.</figcaption>
+					</td>
+				  </tr>
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/P6_sym_1.png" width="400px"/>
+					  <figcaption>1st iteration of subdivision.</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/p6_sym_2.png" width="400px"/>
+					  <figcaption>2nd iteration of subdivision.</figcaption>
+					</td>
+				  </tr>
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/p6_sym_3.png" width="400px"/>
+					  <figcaption>showing the symmetrical cube from a different angle.</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+		</p>
 	</body>
 </html>
