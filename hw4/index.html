@@ -28,15 +28,15 @@
 	<body>
 		<div class="container">
 		<h1>CS184/284A Spring 2025 Homework 4 Write-Up</h1>
-		<div style="text-align: center;">Names: </div>
+		<div style="text-align: center;">Names: Karina Jin & Jackie Lian</div>
 
 		<br>
 
-		Link to webpage: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
+		Link to webpage: <a href="https://cal-cs184-student.github.io/hw-webpages-kj_jl/hw4/index.html">cal-cs184-student.github.io/hw-webpages-kj_jl/hw4/index.html</a>
 
 		<br>
 
-		Link to GitHub repository: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
+		Link to GitHub repository: <a href="https://github.com/cal-cs184-student/sp25-hw4-supreme">cal-cs184-student/sp25-hw4-supreme</a>
 
 		<figure>
 			<img src="clothsim.png" alt="Cloth draped over sphere" style="width:70%"/>
@@ -51,9 +51,52 @@
 		Give a high-level overview of what you implemented in this homework. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the homework.
 
 		<h2>Part 1: Masses and springs</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>
+			<span style="color: blue;"> 1) Take some screenshots of scene/pinned2.json from a viewing angle where you can clearly see the cloth wireframe to show the structure of your point masses and springs.</span><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part1_pinned2_far.png" width="250px"/>
+					  <figcaption>pinned2.json at far view</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part1_pinned2_mid.png" width="250px"/>
+					  <figcaption>pinned2.json at mid view</figcaption>
+					</td>
+					<td style="text-align: center;">
+						<img src="images/part1_pinned2_close.png" width="250px"/>
+						<figcaption>pinned2.json at close view</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<br>
+			<span style="color: blue;"> 2) Show us what the wireframe looks like (1) without any shearing constraints, (2) with only shearing constraints, and (3) with all constraints.</span> <br><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part1_without_shearing.png" width="250px"/>
+					  <figcaption>pinned2.json without shearing constraint</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part1_only_shearing.png" width="250px"/>
+					  <figcaption>pinned2.json with only shearing constraint</figcaption>
+					</td>
+					<td style="text-align: center;">
+						<img src="images/part1_all_constraints.png" width="250px"/>
+						<figcaption>pinned2.json with all three constraints</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+		</p>
 
-		<p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>
+
+
+
+		<!-- <p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>
 		<div style="display: flex; flex-direction: column; align-items: center;">
 			<table style="width: 100%; text-align: center; border-collapse: collapse;">
 			  <tr>
@@ -77,11 +120,198 @@
 				</td>
 			  </tr>
 			</table>
-		</div>
+		</div> -->
 
 		<h2>Part 2: Simulation via numerical integration</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>
+			<span style="color: blue;"> 1) Describe the effects of changing the spring constant ks; how does the cloth behave from start to rest with a very low ks? A high ks?</span><br>
+			<span style="color: black"> The higher the spring constant ks, the stiffer and straighter the cloth. As we can see from the images below, the higher ks, the less curve there is at the top of the cloth in its final resting state (first row). The cloth will shake and tumble more when it falls from start to rest with lower ks while cloth with high ks goes down very smooth and straight.<br><br>
+				For pinned4, it's quite noticeable that as we increase ks, the cloth starts to shake a lot less (in less amplitude) before coming to rest while lower ks will result in more bouncy cloth which will bounce in a larger magnitude before coming to rest.</span><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part2_ks_50.png" width="190px"/>
+					  <figcaption>pinned2 ks = 50</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part2_ks_500.png" width="190px"/>
+					  <figcaption>pinned2 ks = 500</figcaption>
+					</td>
+					<td style="text-align: center;">
+						<img src="images/part2_ks_5000.png" width="190px"/>
+						<figcaption>pinned2 ks = 5000</figcaption>
+					</td>
+					<td style="text-align: center;">
+						<img src="images/part2_ks_50000.png" width="190px"/>
+						<figcaption>pinned2 ks = 50000</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part2_ks2_5.png" width="250px"/>
+					  <figcaption>pinned4 ks = 5</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part2_ks2_500.png" width="250px"/>
+					  <figcaption>pinned4 ks = 500</figcaption>
+					</td>
+					<td style="text-align: center;">
+						<img src="images/part2_ks2_50000.png" width="250px"/>
+						<figcaption>pinned4 ks = 50000</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<br><br>
+			<span style="color: blue;"> 2) What about for density?</span><br>
+			<span style="color: black"> As we increase the density, the cloth becomes heavier, which makes it become more dragged down by gravity during the process. As we can see from the images below, in the final resting position, cloth with higher density (like 100g/cm2) will have a deeper dip and more wrinkles at the top which indicates its heaviness (being dragged down more by gravity.</span><br><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part2_density_1.png" width="190px"/>
+					  <figcaption>pinned2 density = 1</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part2_density_15.png" width="190px"/>
+					  <figcaption>pinned2 density = 15</figcaption>
+					</td>
+					<td style="text-align: center;">
+						<img src="images/part2_density_30.png" width="190px"/>
+						<figcaption>pinned2 density = 30</figcaption>
+					</td>
+					<td style="text-align: center;">
+						<img src="images/part2_density_100.png" width="190px"/>
+						<figcaption>pinned2 density = 100</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<br>
+			<span style="color: black"> For pinned4, we can clearly see that as we increase the density, the center of the cloth dips deeper. The smaller the density (like 1g/cm2), the shallower the bowl-shape we get. <br>
+				In addition, similar to increasing ks, as we increase density, the cloth appears to be stiffer where it bounces less with smaller amplitude before coming to rest in the final position.</span><br><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part2_density2_1.png" width="250px"/>
+					  <figcaption>pinned4 density = 1</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part2_density2_15.png" width="250px"/>
+					  <figcaption>pinned4 density = 15</figcaption>
+					</td>
+					<td style="text-align: center;">
+						<img src="images/part2_density2_30.png" width="250px"/>
+						<figcaption>pinned4 density = 30</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<br><br>
+			<span style="color: blue;"> 3) What about for damping?</span><br>
+			<span style="color: black"> Damping greatly affects how fast the cloth can stop moving and go into the final resting position. In the simulation when we set damping = 0, the cloth takes a long time to get into a relatively stable state. With damping = 0, the cloth swings pretty intensely back and forth in the beginning as we can see from the image. Then it begins to swing less as time moves on but the slowing down is quite slow. The cloth never really comes to a final rest before we run out of patience and quit the simulation.</span><br><br>
+			<span style = "color: black">pinned2.json, damping = 0</span>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part2_damping_0_start.png" width="190px"/>
+					  <figcaption>start</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part2_damping_0_mid.png" width="190px"/>
+					  <figcaption>intermediate 1</figcaption>
+					</td>
+					<td style="text-align: center;">
+						<img src="images/part2_damping_0_mid2.png" width="190px"/>
+						<figcaption>intermediate 2</figcaption>
+					</td>
+					<td style="text-align: center;">
+						<img src="images/part2_damping_0_awhile.png" width="190px"/>
+						<figcaption>after a while</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<br>
+			<span style="color: black"> When we increased damping to around 0.1%, it took about 3 seconds for the cloth to come to rest with some swinging back and forth during the process. When we increase damping to around 0.2%, the cloth almost doesn't swing back at all before coming to a stop and it only took around 2 seconds to stop. Then as we increase damping from there, the cloth begins to fall slower and slower until we reach 1. When damping = 1, the cloth isn't swinging at all and it falls with very flat and smooth surface (compared to the very wrinkled surface of cloth when it starts to fall when damping = 0).</span><br><br>
+			<span style = "color: black">pinned2.json, damping = 1</span>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+				  <tr>
+					<td style="text-align: center;">
+					  <img src="images/part2_damping_1(1).png" width="145px"/>
+					  <figcaption>t = 1</figcaption>
+					</td>
+					<td style="text-align: center;">
+					  <img src="images/part2_damping_1(2).png" width="145px"/>
+					  <figcaption>t = 2</figcaption>
+					</td>
+					<td style="text-align: center;">
+						<img src="images/part2_damping_1(3).png" width="145px"/>
+						<figcaption>t = 3</figcaption>
+					</td>
+					<td style="text-align: center;">
+						<img src="images/part2_damping_1(4).png" width="145px"/>
+						<figcaption>t = 4</figcaption>
+					</td>
+					<td style="text-align: center;">
+						<img src="images/part2_damping_1(5).png" width="145px"/>
+						<figcaption>t = 5</figcaption>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<br>
+			<span style="color: black"> For pinned4, we can also see very clearly how bouncy and wrinkled the cloth's surface is when damping is low (=0 %) and continues to bounce for a very long time before coming to final stop. When we increase damping to 1, the cloth falls with a perfectly smooth and flat face and immediately comes to a stop when it reaches the bottom.</span><br><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+					<tr>
+					  <td style="text-align: center;">
+						<img src="images/part2_damping2_0(1).png" width="400px"/>
+						<figcaption>pinned4 damping = 0 start</figcaption>
+					  </td>
+					  <td style="text-align: center;">
+						<img src="images/part2_damping2_0(2).png" width="400px"/>
+						<figcaption>pinned4 damping = 0 final</figcaption>
+					  </td>
+					</tr>
+					<tr>
+					  <td style="text-align: center;">
+						<img src="images/part2_damping2_1_fall.png" width="400px"/>
+						<figcaption>pinned4 damping = 1 start</figcaption>
+					  </td>
+					  <td style="text-align: center;">
+						<img src="images/part2_damping2_1_rest.png" width="400px"/>
+						<figcaption>pinned4 damping = 1 final</figcaption>
+					  </td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<span style="color: blue;"> 4) Show us a screenshot of your shaded cloth from scene/pinned4.json in its final resting state!</span><br><br>
+			<div style="display: flex; flex-direction: column; align-items: center;">
+				<table style="width: 100%; text-align: center; border-collapse: collapse;">
+					<tr>
+					  <td style="text-align: center;">
+						<img src="images/part2_pinned4_default.png" width="400px"/>
+						<figcaption>pinned4 default at final resting state</figcaption>
+					  </td>
+					</tr>
+				</table>
+			</div>
+			
 
+
+
+			
 		<h2>Part 3: Handling collisions with other objects</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
