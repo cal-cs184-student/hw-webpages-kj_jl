@@ -51,7 +51,7 @@
 		<span style="color: black;"> In this assignment, we implemented a physically based cloth simulation from scratch, combining numerical integration, collision detection, and real-time rendering to create a dynamic and visually compelling system. We began by modeling the cloth as a grid of point masses connected by structural, shearing, and bending springs, and simulated its motion using Verlet integration under external forces like gravity. Then we added collision handling with external objects such as planes and spheres, followed by efficient self-collision detection using spatial hashing to prevent the cloth from intersecting itself. Finally, we explored various shading techniques including Phong shading, bump mapping, displacement mapping which enhanced the visual realism and expressiveness of the cloth. Some interesting things we have learned from completing this assignment are that 1) just by changing the damping factor by a little bit can drastically change how the cloth behaves from beginning to end (sometimes the cloth is crazily bouncy) 2) we can actually make the surfaces of objects behave like mirrors through shaders. It's super cool to see the mirror shader taking effect on the plane and sphere (the sphere becomes like a glassy ball) 3) modifying the light intensities and colors can make the same scene look totally different. </span><br>
 			
 
-		<!-- <h2>Part 1: Masses and springs</h2>
+		<h2>Part 1: Masses and springs</h2>
 		<p>
 			<span style="color: blue;"> 1) Take some screenshots of scene/pinned2.json from a viewing angle where you can clearly see the cloth wireframe to show the structure of your point masses and springs.</span><br>
 			<div style="display: flex; flex-direction: column; align-items: center;">
@@ -92,7 +92,7 @@
 				  </tr>
 				</table>
 			</div>
-		</p> -->
+		</p>
 
 		<h2>Part 2: Simulation via numerical integration</h2>
 		<p>
